@@ -1,0 +1,26 @@
+{
+  "name": "api-rest-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvertonCarvalho1/api-rest-nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvertonCarvalho1/api-rest-nodejs/issues"
+  },
+  "homepage": "https://github.com/EvertonCarvalho1/api-rest-nodejs#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "fastify": "^4.12.0"
+  }
+}
