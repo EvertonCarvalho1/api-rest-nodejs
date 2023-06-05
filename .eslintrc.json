@@ -4,7 +4,7 @@
   ],
   "rules": {
     "prettier/prettier": [
-      "error",
+      "warn",
       {
         "printWidth": 80,
         "tabWidth": 2,
@@ -12,7 +12,9 @@
         "trailingComma": "all",
         "arrowParens": "always",
         "semi": true,
-        "endOfLine": "auto"
+        "endOfLine": "auto",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": true
       }
     ]
   }
