@@ -11,4 +11,4 @@ db/*.db
 # Build
 build
 
-tmp/app.db
+db/app.db
