@@ -4,32 +4,44 @@ import crypto from 'node:crypto';
 import { knex } from '../database';
 import { checkSessionIdExists } from '../middlewares/check-session-id-exists';
 
-export async function transactionsRoutes(app: FastifyInstance) {
-  app.get('/', { preHandler: [checkSessionIdExists] }, async (request) => {
-    const { sessionId } = request.cookies;
+export async function transactionsRoutes(
+  app: FastifyInstance,
+) {
+  app.get(
+    '/',
+    { preHandler: [checkSessionIdExists] },
+    async (request) => {
+      const { sessionId } = request.cookies;
 
-    const transactions = await knex('transactions')
-      .where('session_id', sessionId)
-      .select();
+      const transactions = await knex('transactions')
+        .where('session_id', sessionId)
+        .select();
 
-    return { transactions };
-  });
+      return { transactions };
+    },
+  );
 
-  app.get('/:id', { preHandler: [checkSessionIdExists] }, async (request) => {
-    const getTransactionParamsSchema = z.object({
-      id: z.string().uuid(),
-    });
+  app.get(
+    '/:id',
+    { preHandler: [checkSessionIdExists] },
+    async (request) => {
+      const getTransactionParamsSchema = z.object({
+        id: z.string().uuid(),
+      });
 
-    const { sessionId } = request.cookies;
+      const { sessionId } = request.cookies;
 
-    const { id } = getTransactionParamsSchema.parse(request.params);
+      const { id } = getTransactionParamsSchema.parse(
+        request.params,
+      );
 
-    const transaction = await knex('transactions')
-      .where({ session_id: sessionId, id })
-      .first();
+      const transaction = await knex('transactions')
+        .where({ session_id: sessionId, id })
+        .first();
 
-    return { transaction };
-  });
+      return { transaction };
+    },
+  );
 
   app.get(
     '/summary',
@@ -52,9 +64,8 @@ export async function transactionsRoutes(app: FastifyInstance) {
       amount: z.number(),
       type: z.enum(['credit', 'debit']),
     });
-    const { title, amount, type } = createTransactionBodySchema.parse(
-      request.body,
-    );
+    const { title, amount, type } =
+      createTransactionBodySchema.parse(request.body);
 
     let sessionId = request.cookies.sessionId;
 
